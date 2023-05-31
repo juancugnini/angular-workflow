@@ -1,0 +1,34 @@
+<div
+  class="node"
+  cdkDrag
+  (cdkDragMoved)="handleDragMoved($event)"
+  [cdkDragFreeDragPosition]="node.initialPosition"
+  (cdkDragMoved)="handleDragMoved($event)"
+  (mouseleave)="setHover(false)"
+>
+  <div (mouseover)="setHover(true)">
+    <input-socket
+      *ngIf="node.inputSocket || isOver || node.linkingTo"
+      (emitFromClick)="selectNodeTo(node)"
+    ></input-socket>
+    <div class="circle" [ngClass]="{ selected: node.isSelected }">
+      <mat-icon> {{node.icon}} </mat-icon>
+    </div>
+  </div>
+  <div class="title" (dblclick)="editNodeLabel(node)">
+    <span *ngIf="!node.editing">{{ node.title }}</span>
+    <input #inputEl
+      (keyup.enter)="cancelEdit(node)"
+      (keyup.escape)="cancelEdit(node)"
+      class="editable"
+      *ngIf="node.editing"
+      [(ngModel)]="node.title"
+      (blur)="cancelEdit(node)"
+      [value]="node.title"
+    />
+  </div>
+  <output-socket
+    *ngIf="node.outputSocket || isOver || node.linkingFrom"
+    (emitToClick)="selectNodeFrom(node)"
+  ></output-socket>
+</div>

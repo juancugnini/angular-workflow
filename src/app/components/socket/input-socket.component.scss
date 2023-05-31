@@ -1,0 +1,15 @@
+.input-socket {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: calc(50% - 10px);
+  left: -10px;
+  width: 20px;
+  height: 20px;
+  z-index: 3;
+  cursor: pointer;
+  box-sizing: border-box;
+  background: orange;
+  border: 2px solid black;
+  border-radius: 50%;
+}

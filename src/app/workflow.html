@@ -1,0 +1,28 @@
+<div class="svg-area" (click)="clearLinking()">
+  <svg class="full-screen">
+    <path
+      *ngFor="let path of paths"
+      class="svg-path"
+      stroke-dasharray="7, 5"
+      [attr.d]="getD(path)"
+    />
+    <path
+      *ngIf="linking"
+      class="svg-path"
+      stroke-dasharray="7, 5"
+      [attr.d]="dottedLine" 
+    />
+  </svg>
+</div>
+
+<node
+  *ngFor="let node of nodes"
+  [node]="node"
+  (changePosition)="handleChangeNodePosition($event)"
+  (nodeEdited)="edittedNode($event)"
+  (newLink)="linkNewNodes($event)"
+></node>
+
+<div style="display: block; position: absolute; z-index: 30">
+  <button (click)="addNode()">Add new node</button>
+</div>
